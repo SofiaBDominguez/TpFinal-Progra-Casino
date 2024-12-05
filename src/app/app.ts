@@ -2,14 +2,15 @@ import * as rls from "readline-sync";
 
 import { Casino } from "./Casino";
 import { Dado } from "./juegos/Dados";
+import { Ruleta } from "./juegos/Ruleta";
 
 function main() {
     // Crear el casino
     const casino = new Casino();
 
     // Agregar juegos al casino
-    casino.agregarJuego(new Dado("Dados Seleccion Argentina"));
-
+    casino.agregarJuego(new Dado("Dados Seleccion Argentina", 50));   
+    casino.agregarJuego(new Ruleta("Ruleta Clásica", 100));  
     //TODO: LOS OTROS JUEGOS
 
     // Iniciar sesion del jugador
@@ -32,7 +33,7 @@ function main() {
                     console.log(`[${index}] ${juego.getNombre()}`);
                 });
 
-                const juegoElegido = rls.questionInt("Ingresa el número del juego que deseas jugar: ");
+                const juegoElegido = rls.questionInt("Ingresa el numero del juego que deseas jugar: ");
 
                 if (juegoElegido >= 0 && juegoElegido < casino.getJuegos().length) {
                     const juegoActual = casino.getJuegos()[juegoElegido];

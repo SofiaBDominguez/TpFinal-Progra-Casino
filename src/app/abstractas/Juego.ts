@@ -11,11 +11,11 @@ export abstract class Juego implements IJuego {
   protected valorPago: Map<string, number>;
   protected jugador: Jugador;
 
-  constructor(nombre: string) {
+  constructor(nombre: string, apuestaMinima: number) {
     this.nombre = nombre;
     this.tipoApuesta = "";
     this.apuesta = 0;
-    this.apuestaMinima = 0;
+    this.apuestaMinima = apuestaMinima;
     this.valorPago = new Map<string, number>();
     this.jugador = new Jugador("Mario Bross", 0);
   }
@@ -25,12 +25,12 @@ export abstract class Juego implements IJuego {
   solicitarApuesta() {
     this.mostrarSaldo();
     let apuesta: number = rls.questionInt("Cuanto va a apostar? ");
-
+  
     while (apuesta < 0 || apuesta > this.jugador.getSaldo()) {
       console.log("Error: elija un tipo de apuesta valido!");
       apuesta = rls.questionInt("Cuanto va a apostar? ");
     }
-
+    this.jugador.reducirSaldo(apuesta);
     this.apuesta = apuesta;
   }
 
