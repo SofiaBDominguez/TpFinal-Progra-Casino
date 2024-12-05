@@ -26,8 +26,8 @@ export abstract class Juego implements IJuego {
     this.mostrarSaldo();
     let apuesta: number = rls.questionInt("Cuanto va a apostar? ");
   
-    while (apuesta < 0 || apuesta > this.jugador.getSaldo()) {
-      console.log("Error: elija un tipo de apuesta valido!");
+    while (apuesta < 0 || apuesta > this.jugador.getSaldo() || apuesta < this.apuestaMinima) {
+      console.log("Error: elija un monto valido!");
       apuesta = rls.questionInt("Cuanto va a apostar? ");
     }
     this.jugador.reducirSaldo(apuesta);

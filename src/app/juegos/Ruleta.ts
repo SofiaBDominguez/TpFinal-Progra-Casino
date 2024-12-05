@@ -42,9 +42,9 @@ export class Ruleta extends Juego {
 
       switch (juegoElegido) {
         case 0:
-          console.log("Seleccione un numero del 0 al 36");
+          console.log("Puede elegir numeros del 0 al 36");
           this.numeroElegido = rls.questionInt(
-            "\n Seleccione el numero del juego: "
+            "\n Elija el numero que desea jugar: "
           );
 
           while (this.getNumeroElegido() < 0 || this.getNumeroElegido() > 36) {
