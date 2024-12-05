@@ -1,11 +1,13 @@
+// Importacion de la libreria ReadLine-Sync para interactuar con la consola 
+import * as rls from 'readline-sync';
 import { IJuego } from "../interfaces/IJuego";
 import { Jugador } from "../Jugador";
 
 export abstract class Juego implements IJuego {
   protected nombre: string;
-  protected tipoApuesta: string;
   protected apuestaMinima: number;
   protected apuesta: number;
+  protected tipoApuesta: string;
   protected valorPago: Map<string, number>;
   protected jugador: Jugador;
 
@@ -20,6 +22,22 @@ export abstract class Juego implements IJuego {
 
   public abstract agregarValorPago(tipoApuesta: string, pago: number): void;
 
+  solicitarApuesta() {
+    this.mostrarSaldo();
+    let apuesta: number = rls.questionInt("Cuanto va a apostar? ");
+
+    while (apuesta < 0 || apuesta > this.jugador.getSaldo()) {
+      console.log("Error: elija un tipo de apuesta valido!");
+      apuesta = rls.questionInt("Cuanto va a apostar? ");
+    }
+
+    this.apuesta = apuesta;
+  }
+
+  mostrarSaldo(): void {
+    console.log("El saldo es: ", this.jugador.getSaldo());
+  }
+
   modificarApuesta(apuesta: number) {
     this.apuesta = apuesta;
   }
@@ -27,50 +45,48 @@ export abstract class Juego implements IJuego {
     this.apuesta += apuesta;
   }
 
-  getNombre() : string {
+  getNombre(): string {
     return this.nombre;
   }
 
-  setNombre(nombre: string) : void{
+  setNombre(nombre: string): void {
     this.nombre = nombre;
   }
-   
-  getApuestaMinima() : number {
+
+  getApuestaMinima(): number {
     return this.apuestaMinima;
   }
 
-  setApuestaMinima(apuestaMinima: number) : void{
+  setApuestaMinima(apuestaMinima: number): void {
     this.apuestaMinima = apuestaMinima;
   }
 
-  getApuesta(apuesta : number){
+  getApuesta(apuesta: number) {
     return this.apuesta;
   }
 
-  getTipoDeApuesta() : string {
+  getTipoDeApuesta(): string {
     return this.tipoApuesta;
   }
 
-  setTipoDeApuesta(tipoApuesta : string) : void {
+  setTipoDeApuesta(tipoApuesta: string): void {
     this.tipoApuesta = tipoApuesta;
   }
 
   // METODOS DE LA INTERFACE IJUEGO
 
   iniciar(jugador: Jugador) {
-    console.log()
-    
+    console.log("Iniciando juego")
+    this.jugador = jugador;
     this.comoJugar();
   }
   comoJugar() {
-    throw new Error("Method not implemented.");
+    console.log("Las reglas son...")
   }
   insertarApuesta(apuesta: number) {
-    this.apuesta = apuesta;  
+    this.apuesta = apuesta;
   }
-  jugarRonda() {
-    throw new Error("Method not implemented.");
-  }
+
   finalizar(): Jugador {
     return this.jugador;
   }

@@ -19,6 +19,14 @@ export class Casino {
         this.juegos.push(juego);
     }
 
+    getJuegos() {
+        return this.juegos;
+    }
+
+    getJugador(): Jugador {
+        return this.jugador!;
+    }
+
     seleccionarJuego(indice: number): Juego {
         return this.juegos[indice];
     }
@@ -31,21 +39,21 @@ export class Casino {
 
         //Luego setearlo
         this.jugador = new Jugador(nombre, saldo);
-                
+
         console.log('Que juego desea jugar? \n');
-        this.juegos.forEach((juego,index) => {
+        this.juegos.forEach((juego, index) => {
             console.log('------------------------------------------------');
             console.log(`[${index}] ${juego.getNombre()}`);
         });
 
-        let juegoElegido : number =  rls.questionInt("Ingrese el juego que quiera jugar: ");
-        while(juegoElegido < 0 || juegoElegido > this.juegos.length ){
-            console.log("Error: elija un juego valido !!!");
+        let juegoElegido: number = rls.questionInt("Ingrese el juego que quiera jugar: ");
+        while (juegoElegido < 0 || juegoElegido > this.juegos.length - 1) {
+            console.log("Error: elija un juego valido!");
             juegoElegido = rls.questionInt("Ingrese el juego que quiera jugar: ");
         }
-    
-        let juegoActual : Juego = this.juegos[juegoElegido];
+
+        let juegoActual: Juego = this.juegos[juegoElegido];
         juegoActual.iniciar(this.jugador);
-        
+
     }
 }
