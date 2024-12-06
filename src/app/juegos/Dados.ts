@@ -41,7 +41,12 @@ export class Dado extends Juego {
       `Bienvenido al juego de dados: ${this.nombre} - Apuesta Minima: ${this.apuestaMinima} \n`
     );
 
-    while (seguirJugando  && this.jugador.getSaldo() >= this.getApuestaMinima()) {
+    if (this.jugador.getSaldo() < this.getApuestaMinima()) {
+      console.log("Tu saldo es insuficiente para jugar este juego - Saldo: " + this.jugador.getSaldo());
+      this.finalizar();
+    }
+
+    while (seguirJugando && this.jugador.getSaldo() >= this.getApuestaMinima()) {
       console.log("Tipos de apuesta disponibles: \n");
 
       this.combinacionesGanadoras.forEach((valor, clave) => {
@@ -78,7 +83,7 @@ export class Dado extends Juego {
       //ACA VER COMO SEGUIR, LE PODEMOS DECIR AL USARIO QUE ELIJA ENTRE LAS OPCIONES DE TIRADA DE NUEVO O VOLVER AL CASINO
       this.mostrarSaldo();
       if (this.jugador.getSaldo() < this.getApuestaMinima()) {
-        console.log("Tu saldo es insuficiente para jugar este juego");
+        console.log("Tu saldo es insuficiente para jugar este juego - Saldo: " + this.jugador.getSaldo());
         this.finalizar();
       } else {
         let desicionJugador = rls.questionInt(

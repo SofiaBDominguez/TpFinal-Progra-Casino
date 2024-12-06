@@ -20,15 +20,22 @@ export class Ruleta extends Juego {
   public iniciar(jugador: Jugador): void {
     super.iniciar(jugador);
     console.log(
-      `Bienvenido al juego de ruleta: ${
-        this.nombre
+      `Bienvenido al juego de ruleta: ${this.nombre
       } - Apuesta Minima: ${this.getApuestaMinima()} \n`
     );
 
+    // Mostrar la ruleta
+    console.log("Números de la ruleta y sus colores:");
+    this.mostrarRuleta();
+
     let seguirJugando: boolean = true;
-    while (
-      seguirJugando &&
-      this.jugador.getSaldo() >= this.getApuestaMinima()
+
+    if (this.jugador.getSaldo() < this.getApuestaMinima()) {
+      console.log("Tu saldo es insuficiente para jugar este juego - Saldo: " + this.jugador.getSaldo());
+      this.finalizar();
+    }
+
+    while (seguirJugando && this.jugador.getSaldo() >= this.getApuestaMinima()
     ) {
       console.log("Tipos de apuesta disponibles: \n");
       console.log("[0] Apostar a un numero");
@@ -78,8 +85,8 @@ export class Ruleta extends Juego {
 
       this.mostrarSaldo();
       if (this.jugador.getSaldo() < this.getApuestaMinima()) {
-        console.log("Tu saldo es insuficiente para jugar este juego");
-        
+        console.log("Tu saldo es insuficiente para jugar este juego - Saldo: " + this.jugador.getSaldo());
+
         this.finalizar();
       } else {
         let desicionJugador = rls.questionInt(
@@ -102,6 +109,33 @@ export class Ruleta extends Juego {
         }
       }
     }
+
+  }
+  public mostrarRuleta(): void {
+    let tablero: string = "";
+    let contador = 0;
+
+    console.log("Tablero de la ruleta: \n");
+    this.casillas.forEach((color, numero) => {
+      if (color === "rojo" && numero < 10) {
+        tablero += `${numero} (${color})  | \t`;
+      } else if (color === "rojo" && numero >= 10) {
+        tablero += `${numero} (${color}) | \t`;
+      } else if (color === "negro" && numero >= 10) {
+        tablero += `${numero} (${color})| \t`;
+      } else if (color === "negro" && numero < 10) {
+        tablero += `${numero} (${color}) | \t`;
+      } else if (numero == 0) {
+        tablero += `\t        ${numero} (${color})`;
+      }
+      // Cada 3 números, hacemos un salto de línea
+      if (contador % 3 === 0) {
+        tablero += "\n";
+      }
+      contador++;
+    });
+
+    console.log(tablero);
   }
   public jugarRonda(juegoElegido: number) {
     // Generar un número ganador aleatorio
