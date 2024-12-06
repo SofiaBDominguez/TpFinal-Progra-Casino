@@ -17,10 +17,23 @@ export class Ruleta extends Juego {
     this.colorElegido = "";
   }
 
+ comoJugar(): void {
+    console.log("🎡 Ruleta");
+    console.log("Descripcion:");
+    console.log(
+      "1- Coloca tu apuesta y elige un numero del 0 al 36 🎯. \n" +
+      "2- Como ganar: Si el numero que eliges coincide con el que sale en la ruleta o si el color que eliges sale tambien. \n" +
+      "3- Las opciones que puedes apostar son: \n" +
+        "- Colores: Rojo o Negro. \n" +
+        "- Numeros: Del 1 al 36.  "
+    );
+  }
+
   public iniciar(jugador: Jugador): void {
     super.iniciar(jugador);
     console.log(
-      `Bienvenido al juego de ruleta: ${this.nombre
+      `Bienvenido al juego de ruleta: ${
+        this.nombre
       } - Apuesta Minima: ${this.getApuestaMinima()} \n`
     );
 
@@ -31,11 +44,16 @@ export class Ruleta extends Juego {
     let seguirJugando: boolean = true;
 
     if (this.jugador.getSaldo() < this.getApuestaMinima()) {
-      console.log("Tu saldo es insuficiente para jugar este juego - Saldo: " + this.jugador.getSaldo());
+      console.log(
+        "Tu saldo es insuficiente para jugar este juego - Saldo: " +
+          this.jugador.getSaldo()
+      );
       this.finalizar();
     }
 
-    while (seguirJugando && this.jugador.getSaldo() >= this.getApuestaMinima()
+    while (
+      seguirJugando &&
+      this.jugador.getSaldo() >= this.getApuestaMinima()
     ) {
       console.log("Tipos de apuesta disponibles: \n");
       console.log("[0] Apostar a un numero");
@@ -85,7 +103,10 @@ export class Ruleta extends Juego {
 
       this.mostrarSaldo();
       if (this.jugador.getSaldo() < this.getApuestaMinima()) {
-        console.log("Tu saldo es insuficiente para jugar este juego - Saldo: " + this.jugador.getSaldo());
+        console.log(
+          "Tu saldo es insuficiente para jugar este juego - Saldo: " +
+            this.jugador.getSaldo()
+        );
 
         this.finalizar();
       } else {
@@ -109,7 +130,6 @@ export class Ruleta extends Juego {
         }
       }
     }
-
   }
   public mostrarRuleta(): void {
     let tablero: string = "";
@@ -118,13 +138,13 @@ export class Ruleta extends Juego {
     console.log("Tablero de la ruleta: \n");
     this.casillas.forEach((color, numero) => {
       if (color === "rojo" && numero < 10) {
-        tablero += `${numero} (${color})  | \t`;
+        tablero += `${numero} ${color}  | \t`;
       } else if (color === "rojo" && numero >= 10) {
-        tablero += `${numero} (${color}) | \t`;
+        tablero += `${numero} ${color} | \t`;
       } else if (color === "negro" && numero >= 10) {
-        tablero += `${numero} (${color})| \t`;
+        tablero += `${numero} ${color} | \t`;
       } else if (color === "negro" && numero < 10) {
-        tablero += `${numero} (${color}) | \t`;
+        tablero += `${numero} ${color} | \t`;
       } else if (numero == 0) {
         tablero += `\t        ${numero} (${color})`;
       }
@@ -199,5 +219,4 @@ export class Ruleta extends Juego {
   public getNumeroGanador(): number {
     return this.numeroElegido;
   }
-
 }

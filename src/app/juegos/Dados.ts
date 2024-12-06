@@ -26,6 +26,19 @@ export class Dado extends Juego {
     ]);
   }
 
+  comoJugar(): void {
+    console.log("\n🎲 Dado");
+    console.log("Descripcion:");
+    console.log(
+      "1- Coloca tu apuesta y lanza un dado. \n" +
+        "2- Como ganar: Si el numero que sale coincide con tu prediccion, ganas! \n" +
+        "3- Tipos de jugadas disponibles: \n" +
+        "   a- Juego de Paredes (5️⃣): Gana si la suma de los dados es 5. \n" +
+        "   b- Juego de De Paul (7️⃣): Gana si la suma de los dados es 7. \n" +
+        "   c- Juego de Messi (🔟): Gana si la suma de los dados es 10."
+    );
+  }
+
   iniciar(jugador: Jugador): void {
     //Implicitamente seteamos el atributo jugador y mostramos las instrucciones
     super.iniciar(jugador);
@@ -108,24 +121,24 @@ export class Dado extends Juego {
             "Volver a jugar? : [0] NO , [1] Si \n"
           );
         }
-        //Verificamos la decision del jugador 
+        //Verificamos la decision del jugador
         if (decisionJugador == 0) {
           //Cortamos la bandera para finalizar el bucle
           seguirJugando = false;
         } else if (decisionJugador == 1) {
-          //Reiniciamos las variables de control del juego 
+          //Reiniciamos las variables de control del juego
           jugadas = [];
         }
       }
     }
-    //Si llegamos hasta aca finalizamos el juego 
+    //Si llegamos hasta aca finalizamos el juego
     this.finalizar();
   }
-/**
- * Metodo encargado de implementar la logica del juego y comunicar el resultado de la apuesta 
- * @param valorGanador number
- * @param jugador Jugador
- */
+  /**
+   * Metodo encargado de implementar la logica del juego y comunicar el resultado de la apuesta
+   * @param valorGanador number
+   * @param jugador Jugador
+   */
   jugarRonda(valorGanador: number, jugador: Jugador) {
     // Generar números aleatorios para los dados
     this.dado1 = Math.floor(Math.random() * this.maxDado) + this.minDado;
@@ -138,7 +151,7 @@ export class Dado extends Juego {
 
     // Verificar si ganó o perdió
     if (this.resultadoFinal === valorGanador) {
-      //Creamos la ganancia a partir de la apuesta y el multiplicador 
+      //Creamos la ganancia a partir de la apuesta y el multiplicador
       const ganancia = this.apuesta * this.multiplicador;
       jugador.agregarSaldo(ganancia);
       console.log(`¡Felicidades! Has ganado ${ganancia} creditos.`);
