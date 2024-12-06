@@ -4,13 +4,11 @@ import * as rls from "readline-sync";
 
 export abstract class Tragamonedas extends Juego {
   protected items: Array<String>;
-  protected itemsGanadores: Array<String>;
 
-  constructor(nombre: string, apuestaMinima: number) {
+  constructor(nombre: string, apuestaMinima: number, multiplicador: number) {
     //super() === Juego() por lo que tengo que respetar los parametros del padre
-    super(nombre, apuestaMinima);
+    super(nombre, apuestaMinima, multiplicador);
     this.items = new Array<String>();
-    this.itemsGanadores = new Array<String>();
   }
 
   protected abstract generarResultado(): string[];
@@ -27,16 +25,16 @@ export abstract class Tragamonedas extends Juego {
     if (this.jugador.getSaldo() < this.getApuestaMinima()) {
       console.log(
         "Tu saldo es insuficiente para jugar este juego - Saldo: " +
-          this.jugador.getSaldo()
+        this.jugador.getSaldo()
       );
       this.finalizar();
     }
 
     while (seguirJugando && this.jugador.getSaldo() >= this.getApuestaMinima()) {
-        this.solicitarApuesta();
-        this.jugarRonda();
+      this.solicitarApuesta();
+      this.jugarRonda();
 
-        this.mostrarSaldo();
+      this.mostrarSaldo();
       if (this.jugador.getSaldo() < this.getApuestaMinima()) {
         console.log("Tu saldo es insuficiente para jugar este juego - Saldo: " + this.jugador.getSaldo());
         this.finalizar();
@@ -54,7 +52,7 @@ export abstract class Tragamonedas extends Juego {
 
         if (desicionJugador == 0) {
           seguirJugando = false;
-        } 
+        }
       }
     }
   }
@@ -62,28 +60,21 @@ export abstract class Tragamonedas extends Juego {
   jugarRonda(): void {
     console.log("Girando los rodillos...");
     const resultado = this.generarResultado();
-    
+
     console.log(`Resultado: ${resultado.join(" | ")}`);
 
     if (this.verificarGanador(resultado)) {
-      console.log("¡Felicidades, has ganado!");
-      this.jugador.agregarSaldo(this.apuesta * 5); // Ganancia fija por ejemplo
+      let ganancia = this.apuesta * this.multiplicador;
+      console.log(`¡Felicidades! Has ganado ${ganancia} creditos.`);
+      this.jugador.agregarSaldo(ganancia); // Ganancia fija por ejemplo
     } else {
-      console.log("Lo siento, no has ganado esta vez.");
+      console.log(`Lo siento, perdiste ${this.apuesta} creditos.`);
     }
   }
 
   protected verificarGanador(resultado: string[]): boolean {
     //metodo json.stringify para pasar a texto plano un atributo
     // return JSON.stringify(resultado) === JSON.stringify(this.itemsGanadores);
-    let bandera = true;
-    let index = 0; 
-    while (bandera == true && index < resultado.length){
-        if (resultado[index] != resultado[index+1] ){
-            return false 
-        }
-        index++;
-    }
-    return true; 
+    return resultado.every(item => item === resultado[0]);
   }
 }

@@ -4,16 +4,17 @@ import { Casino } from "./Casino";
 import { Dado } from "./juegos/Dados";
 import { Ruleta } from "./juegos/Ruleta";
 import { TragamonedasComida } from "./juegos/TragamonedasComida";
+import { TragamonedasSeleccion } from "./juegos/TragamonedasSeleccion";
 
 function main() {
     // Crear el casino
     const casino = new Casino();
 
     // Agregar juegos al casino
-    casino.agregarJuego(new Dado("Dados Seleccion Argentina", 50));   
-    casino.agregarJuego(new Ruleta("Ruleta Clásica", 100));  
-    casino.agregarJuego(new TragamonedasComida ("Tragamonedas de Comida",25));
-    //TODO: LOS OTROS JUEGOS
+    casino.agregarJuego(new Dado("Dados Seleccion Argentina", 50, 2));
+    casino.agregarJuego(new Ruleta("Ruleta Clásica", 100, 36));
+    casino.agregarJuego(new TragamonedasComida("Tragamonedas de Comida", 25, 5));
+    casino.agregarJuego(new TragamonedasSeleccion("Tragamonedas de la seleccion", 50, 25));
 
     // Iniciar sesion del jugador
     casino.iniciarSesion();
@@ -30,10 +31,7 @@ function main() {
 
         switch (opcion) {
             case 1:
-                console.log("\n Los juegos disponibles son:");
-                casino.getJuegos().forEach((juego, index) => {
-                    console.log(`[${index}] ${juego.getNombre()}`);
-                });
+                casino.mostrarJuegos();
 
                 const juegoElegido = rls.questionInt("Ingresa el numero del juego que deseas jugar: ");
 

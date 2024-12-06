@@ -8,8 +8,8 @@ export class Ruleta extends Juego {
   protected numeroElegido: number;
   protected numeroGanador: number;
 
-  constructor(nombre: string, apuestaMinima: number) {
-    super(nombre, apuestaMinima);
+  constructor(nombre: string, apuestaMinima: number, multiplicador: number) {
+    super(nombre, apuestaMinima, multiplicador);
     this.casillas = new Map<number, string>();
     this.setCasillas();
     this.numeroElegido = 0;
@@ -148,11 +148,11 @@ export class Ruleta extends Juego {
     if (juegoElegido === 0) {
       // si juega a los numeros
       if (this.numeroElegido === this.numeroGanador) {
-        const ganancia = this.apuesta * 36;
+        const ganancia = this.apuesta * this.multiplicador;
         this.jugador.agregarSaldo(ganancia);
         console.log(`¡Felicidades! Has ganado ${ganancia} creditos.`);
       } else {
-        console.log("Lo siento, has perdido apostando al número.");
+        console.log(`Lo siento, perdiste ${this.apuesta} creditos.`);
       }
     } else if (juegoElegido === 1) {
       // si juega a los colores
@@ -200,4 +200,4 @@ export class Ruleta extends Juego {
     return this.numeroElegido;
   }
 
-  }
+}

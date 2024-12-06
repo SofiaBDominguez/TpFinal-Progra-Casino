@@ -1,13 +1,12 @@
 import { Tragamonedas } from "../abstractas/Tragamonedas";
 
 export class TragamonedasComida extends Tragamonedas {
-   
+
     private simbolos: string[];
 
-    constructor(nombre: string, apuestaMinima: number) {
-        super(nombre, apuestaMinima);
-        this.simbolos = ["🍎","🍉","🍇","🍌","🍍"]; // Conjunto de símbolos
-        this.itemsGanadores = ["🍍", "🍍", "🍍"]; // Configuración ganadora
+    constructor(nombre: string, apuestaMinima: number, multiplicador: number) {
+        super(nombre, apuestaMinima, multiplicador);
+        this.simbolos = ["🍉", "🍇", "🍌", "🍍"]; // Conjunto de símbolos
     }
 
     protected generarResultado(): string[] {

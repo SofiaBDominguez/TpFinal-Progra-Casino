@@ -6,12 +6,14 @@ import { Jugador } from "../Jugador";
 export abstract class Juego implements IJuego {
   protected nombre: string;
   protected apuestaMinima: number;
+  protected multiplicador: number;
   protected apuesta: number;
   protected tipoApuesta: string;
-    protected jugador: Jugador;
+  protected jugador: Jugador;
 
-  constructor(nombre: string, apuestaMinima: number) {
+  constructor(nombre: string, apuestaMinima: number, multiplicador: number) {
     this.nombre = nombre;
+    this.multiplicador = multiplicador;
     this.tipoApuesta = "";
     this.apuesta = 0;
     this.apuestaMinima = apuestaMinima;
@@ -21,7 +23,7 @@ export abstract class Juego implements IJuego {
   solicitarApuesta() {
     this.mostrarSaldo();
     let apuesta: number = rls.questionInt("Cuanto va a apostar? ");
-  
+
     while (apuesta < 0 || apuesta > this.jugador.getSaldo() || apuesta < this.apuestaMinima) {
       console.log("Error: elija un monto valido!");
       apuesta = rls.questionInt("Cuanto va a apostar? ");

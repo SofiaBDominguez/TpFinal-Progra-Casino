@@ -40,11 +40,7 @@ export class Casino {
         //Luego setearlo
         this.jugador = new Jugador(nombre, saldo);
 
-        console.log('Que juego desea jugar? \n');
-        this.juegos.forEach((juego, index) => {
-            console.log('------------------------------------------------');
-            console.log(`[${index}] ${juego.getNombre()}`);
-        });
+        this.mostrarJuegos();
 
         let juegoElegido: number = rls.questionInt("Ingrese el juego que quiera jugar: ");
         while (juegoElegido < 0 || juegoElegido > this.juegos.length - 1) {
@@ -55,5 +51,14 @@ export class Casino {
         let juegoActual: Juego = this.juegos[juegoElegido];
         juegoActual.iniciar(this.jugador);
 
+    }
+
+    mostrarJuegos(): void {
+        console.log('\n Que juego desea jugar?');
+        this.juegos.forEach((juego, index) => {
+            console.log('------------------------------------------------');
+            console.log(`[${index}] ${juego.getNombre()}`);
+        });
+        console.log('------------------------------------------------');
     }
 }

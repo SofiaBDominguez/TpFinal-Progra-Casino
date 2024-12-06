@@ -11,8 +11,8 @@ export class Dado extends Juego {
   private minDado: number;
   private maxDado: number;
 
-  constructor(nombre: string, apuestaMinima: number) {
-    super(nombre, apuestaMinima);
+  constructor(nombre: string, apuestaMinima: number, multiplicador: number) {
+    super(nombre, apuestaMinima, multiplicador);
     this.minDado = 1;
     this.maxDado = 6;
     this.dado1 = 0;
@@ -25,7 +25,7 @@ export class Dado extends Juego {
     ]);
   }
 
-   iniciar(jugador: Jugador): void {
+  iniciar(jugador: Jugador): void {
     super.iniciar(jugador);
 
     let index = 0;
@@ -116,7 +116,7 @@ export class Dado extends Juego {
 
     // Verificar si ganó o perdió
     if (this.resultadoFinal === valorGanador) {
-      const ganancia = this.apuesta * 2; // Ejemplo de pago
+      const ganancia = this.apuesta * this.multiplicador; // Ejemplo de pago
       jugador.agregarSaldo(ganancia);
       console.log(`¡Felicidades! Has ganado ${ganancia} creditos.`);
     } else {
