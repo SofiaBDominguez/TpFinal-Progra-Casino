@@ -1,0 +1,41 @@
+------------------------------------------------------------------------------
+🎮 Instructivo General 
+1. Selecciona el juego que desees jugar en el menú.
+2. Ingresa el monto de tu apuesta y sigue las indicaciones del juego.
+3. Si te quedas sin saldo, podrás agregar más para seguir jugando.
+✨ Juega responsablemente y diviértete.
+------------------------------------------------------------------------------
+🎰 Tragamonedas: Selección
+Descripción:
+
+1- Selecciona tu apuesta y gira para obtener 4 símbolos numéricos.
+2- Símbolos posibles: 10, 11, 23.
+3- Cómo ganar: Si los 4 símbolos coinciden, ¡ganas fichas!
+4- Ejemplo de victoria: (11 | 11 | 11 | 11).
+
+🍉 Tragamonedas: Comida
+Descripción:
+
+1-Haz tu apuesta para obtener 3 símbolos de comida.
+2-Símbolos posibles: 🍉, 🍇, 🍌, 🍍.
+3-Cómo ganar: Si los 3 símbolos coinciden, ¡ganas fichas!
+4-Ejemplo de jackpot: 🍇 | 🍇 | 🍇.
+
+🎡 Ruleta
+Descripción:
+
+1-Coloca tu apuesta y elige un número del 0 al 36 🎯.
+2-Cómo ganar: Si el número que eliges coincide con el que sale en la ruleta.
+3-También puedes apostar por:
+4-Colores: Rojo ❤️ o negro 🖤.
+
+🎲 Dado
+Descripción:
+
+1-Coloca tu apuesta y lanza un dado.
+2-Cómo ganar:
+3-Si el número que sale coincide con tu predicción, ¡ganas!
+4-Tipos de jugadas disponibles:
+  a- 5️⃣Juego de Paredes: Gana si la suma de los dados es 5.
+  b- 7️⃣Juego de De Paul: Gana si la suma de los dados es 7.
+  c- 🔟Juego de Messi: Gana si la suma de los dados es 10.
