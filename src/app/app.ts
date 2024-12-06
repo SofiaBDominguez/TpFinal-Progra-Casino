@@ -3,6 +3,7 @@ import * as rls from "readline-sync";
 import { Casino } from "./Casino";
 import { Dado } from "./juegos/Dados";
 import { Ruleta } from "./juegos/Ruleta";
+import { TragamonedasComida } from "./juegos/TragamonedasComida";
 
 function main() {
     // Crear el casino
@@ -11,6 +12,7 @@ function main() {
     // Agregar juegos al casino
     casino.agregarJuego(new Dado("Dados Seleccion Argentina", 50));   
     casino.agregarJuego(new Ruleta("Ruleta Clásica", 100));  
+    casino.agregarJuego(new TragamonedasComida ("Tragamonedas de Comida",25));
     //TODO: LOS OTROS JUEGOS
 
     // Iniciar sesion del jugador

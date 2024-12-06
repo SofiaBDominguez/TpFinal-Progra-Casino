@@ -25,11 +25,7 @@ export class Dado extends Juego {
     ]);
   }
 
-  public agregarValorPago(tipoApuesta: string, pago: number): void {
-    this.valorPago.set(tipoApuesta, pago);
-  }
-
-  iniciar(jugador: Jugador): void {
+   iniciar(jugador: Jugador): void {
     super.iniciar(jugador);
 
     let index = 0;

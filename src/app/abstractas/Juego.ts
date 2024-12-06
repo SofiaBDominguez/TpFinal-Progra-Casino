@@ -8,19 +8,15 @@ export abstract class Juego implements IJuego {
   protected apuestaMinima: number;
   protected apuesta: number;
   protected tipoApuesta: string;
-  protected valorPago: Map<string, number>;
-  protected jugador: Jugador;
+    protected jugador: Jugador;
 
   constructor(nombre: string, apuestaMinima: number) {
     this.nombre = nombre;
     this.tipoApuesta = "";
     this.apuesta = 0;
     this.apuestaMinima = apuestaMinima;
-    this.valorPago = new Map<string, number>();
     this.jugador = new Jugador("Mario Bross", 0);
   }
-
-  public abstract agregarValorPago(tipoApuesta: string, pago: number): void;
 
   solicitarApuesta() {
     this.mostrarSaldo();

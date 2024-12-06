@@ -200,7 +200,4 @@ export class Ruleta extends Juego {
     return this.numeroElegido;
   }
 
-  public agregarValorPago(tipoApuesta: string, pago: number): void {
-    throw new Error("Method not implemented.");
   }
-}
