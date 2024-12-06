@@ -8,22 +8,22 @@ export abstract class Juego implements IJuego {
   protected apuestaMinima: number;
   protected multiplicador: number;
   protected apuesta: number;
-  protected tipoApuesta: string;
   protected jugador: Jugador;
 
   constructor(nombre: string, apuestaMinima: number, multiplicador: number) {
     this.nombre = nombre;
     this.multiplicador = multiplicador;
-    this.tipoApuesta = "";
     this.apuesta = 0;
     this.apuestaMinima = apuestaMinima;
     this.jugador = new Jugador("Mario Bross", 0);
   }
-
+  /**
+   * Metodo que solicita al usuario el monto de la apuesta teniendo en cuenta los posibles errores
+   */
   solicitarApuesta() {
     this.mostrarSaldo();
     let apuesta: number = rls.questionInt("Cuanto va a apostar? ");
-
+    //Se buscan todos los errores posibles 
     while (apuesta < 0 || apuesta > this.jugador.getSaldo() || apuesta < this.apuestaMinima) {
       console.log("Error: elija un monto valido!");
       apuesta = rls.questionInt("Cuanto va a apostar? ");
@@ -38,9 +38,6 @@ export abstract class Juego implements IJuego {
 
   modificarApuesta(apuesta: number) {
     this.apuesta = apuesta;
-  }
-  agregarApuesta(apuesta: number): void {
-    this.apuesta += apuesta;
   }
 
   getNombre(): string {
@@ -59,20 +56,16 @@ export abstract class Juego implements IJuego {
     this.apuestaMinima = apuestaMinima;
   }
 
-  getApuesta(apuesta: number) {
+  getApuesta() {
     return this.apuesta;
   }
 
-  getTipoDeApuesta(): string {
-    return this.tipoApuesta;
-  }
-
-  setTipoDeApuesta(tipoApuesta: string): void {
-    this.tipoApuesta = tipoApuesta;
-  }
-
   // METODOS DE LA INTERFACE IJUEGO
-
+  /**
+   * Metodo para dar inicio al juego 
+   * Implicitamente seteamos el atributo jugador y mostramos las instrucciones
+   * @param jugador Jugador
+   */
   iniciar(jugador: Jugador) {
     console.log("Iniciando juego")
     this.jugador = jugador;
@@ -87,8 +80,5 @@ export abstract class Juego implements IJuego {
 
   finalizar(): Jugador {
     return this.jugador;
-  }
-  tipoDeApuesta() {
-    throw new Error("Method not implemented.");
   }
 }

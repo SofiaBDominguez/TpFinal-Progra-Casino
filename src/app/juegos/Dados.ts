@@ -18,6 +18,7 @@ export class Dado extends Juego {
     this.dado1 = 0;
     this.dado2 = 0;
     this.resultadoFinal = 0;
+    //Se le asigna una clave (string) y un valor (number)
     this.combinacionesGanadoras = new Map([
       ["Juego de Paredes", 5],
       ["Juego de De Paul", 7],
@@ -26,25 +27,32 @@ export class Dado extends Juego {
   }
 
   iniciar(jugador: Jugador): void {
+    //Implicitamente seteamos el atributo jugador y mostramos las instrucciones
     super.iniciar(jugador);
 
     let index = 0;
     let jugadas: string[] = [];
-
+    //Bandera para controlar al bucle
     let seguirJugando: boolean = true;
 
     console.log(
       `Bienvenido al juego de dados: ${this.nombre} - Apuesta Minima: ${this.apuestaMinima} \n`
     );
-
+    //Verificamos que el saldo sea suficiente, si no lo es finalizamos el juego
     if (this.jugador.getSaldo() < this.getApuestaMinima()) {
-      console.log("Tu saldo es insuficiente para jugar este juego - Saldo: " + this.jugador.getSaldo());
+      console.log(
+        "Tu saldo es insuficiente para jugar este juego - Saldo: " +
+          this.jugador.getSaldo()
+      );
       this.finalizar();
     }
-
-    while (seguirJugando && this.jugador.getSaldo() >= this.getApuestaMinima()) {
+    //Iniciamos el bucle verificando la bandera y tambien verificamos que el saldo sea suficiente partida a partida
+    while (
+      seguirJugando &&
+      this.jugador.getSaldo() >= this.getApuestaMinima()
+    ) {
       console.log("Tipos de apuesta disponibles: \n");
-
+      //Le mostramos al usuario las combinaciones a apostar
       this.combinacionesGanadoras.forEach((valor, clave) => {
         jugadas.push(clave);
         console.log(
@@ -53,15 +61,17 @@ export class Dado extends Juego {
         index++;
       });
 
+      //Le pedimos al usuario que seleccione su combinacion ganadora
       let juegoElegido: number = rls.questionInt(
         "\n Seleccione el numero del juego: "
       );
 
+      //Verificamos que el usuario ingrese una opcion valida
       if (juegoElegido < 0 || juegoElegido > jugadas.length - 1) {
         console.log("Error: elija un juego valido!");
         juegoElegido = rls.questionInt("\n Seleccione el numero del juego: ");
       }
-
+      //Guardamos la combinacion ganadora y el valor correspondiente
       const combinacionElegida = jugadas[juegoElegido];
       const valorGanador = this.combinacionesGanadoras.get(combinacionElegida);
 
@@ -76,34 +86,46 @@ export class Dado extends Juego {
       // Iniciar la ronda
       this.jugarRonda(valorGanador!, jugador);
 
-      //ACA VER COMO SEGUIR, LE PODEMOS DECIR AL USARIO QUE ELIJA ENTRE LAS OPCIONES DE TIRADA DE NUEVO O VOLVER AL CASINO
       this.mostrarSaldo();
+
+      //Verificamos que el saldo sea suficiente
       if (this.jugador.getSaldo() < this.getApuestaMinima()) {
-        console.log("Tu saldo es insuficiente para jugar este juego - Saldo: " + this.jugador.getSaldo());
+        console.log(
+          "Tu saldo es insuficiente para jugar este juego - Saldo: " +
+            this.jugador.getSaldo()
+        );
         this.finalizar();
       } else {
-        let desicionJugador = rls.questionInt(
+        //Le ofrecemos al usuario volver a jugar
+        let decisionJugador = rls.questionInt(
           "Volver a jugar? : [0] NO , [1] Si \n"
         );
 
-        while (desicionJugador != 0 && desicionJugador != 1) {
+        //Iniciamos el bucle hasta que el jugador ingrese la opcion correcta
+        while (decisionJugador != 0 && decisionJugador != 1) {
           console.log("Error: seleccione una opcion valida!");
-          desicionJugador = rls.questionInt(
+          decisionJugador = rls.questionInt(
             "Volver a jugar? : [0] NO , [1] Si \n"
           );
         }
-
-        if (desicionJugador == 0) {
+        //Verificamos la decision del jugador 
+        if (decisionJugador == 0) {
+          //Cortamos la bandera para finalizar el bucle
           seguirJugando = false;
-        } else if (desicionJugador == 1) {
+        } else if (decisionJugador == 1) {
+          //Reiniciamos las variables de control del juego 
           jugadas = [];
         }
       }
     }
-
+    //Si llegamos hasta aca finalizamos el juego 
     this.finalizar();
   }
-
+/**
+ * Metodo encargado de implementar la logica del juego y comunicar el resultado de la apuesta 
+ * @param valorGanador number
+ * @param jugador Jugador
+ */
   jugarRonda(valorGanador: number, jugador: Jugador) {
     // Generar números aleatorios para los dados
     this.dado1 = Math.floor(Math.random() * this.maxDado) + this.minDado;
@@ -116,7 +138,8 @@ export class Dado extends Juego {
 
     // Verificar si ganó o perdió
     if (this.resultadoFinal === valorGanador) {
-      const ganancia = this.apuesta * this.multiplicador; // Ejemplo de pago
+      //Creamos la ganancia a partir de la apuesta y el multiplicador 
+      const ganancia = this.apuesta * this.multiplicador;
       jugador.agregarSaldo(ganancia);
       console.log(`¡Felicidades! Has ganado ${ganancia} creditos.`);
     } else {
