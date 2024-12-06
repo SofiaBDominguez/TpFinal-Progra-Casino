@@ -74,9 +74,6 @@ export abstract class Juego implements IJuego {
   comoJugar() {
     console.log("Las reglas son...")
   }
-  insertarApuesta(apuesta: number) {
-    this.apuesta = apuesta;
-  }
 
   finalizar(): Jugador {
     return this.jugador;

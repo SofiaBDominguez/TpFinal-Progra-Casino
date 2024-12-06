@@ -21,6 +21,10 @@ export class Jugador {
     this.saldo = saldo;
   }
 
+  getNombre(): string {
+    return this.nombre;
+  }
+
   /**
    * Resta el saldo segun la apuesta ingresada por parametro
    * @param apuesta number
