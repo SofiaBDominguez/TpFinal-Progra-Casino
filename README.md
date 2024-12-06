@@ -1,1 +1,2 @@
 - Draw IO con diagrama UML: https://drive.google.com/file/d/1oLFW1ppvT7ODx41l5OXQf3Ht0GFjpoAA/view?usp=sharing
+- Excel con las pruebas: https://docs.google.com/spreadsheets/d/1gwZxAf1h9UHburdEFFfquM36hG6UP6J5ZEMCWEj6rsE/edit?usp=sharing 
