@@ -27,15 +27,15 @@ export class Dado extends Juego {
   }
 
   comoJugar(): void {
-    console.log("\n🎲 Dado");
+    console.log("\n 🎲 Dado");
     console.log("Descripcion:");
     console.log(
       "1- Coloca tu apuesta y lanza un dado. \n" +
-        "2- Como ganar: Si el numero que sale coincide con tu prediccion, ganas! \n" +
-        "3- Tipos de jugadas disponibles: \n" +
-        "   a- Juego de Paredes (5️⃣): Gana si la suma de los dados es 5. \n" +
-        "   b- Juego de De Paul (7️⃣): Gana si la suma de los dados es 7. \n" +
-        "   c- Juego de Messi (🔟): Gana si la suma de los dados es 10."
+      "2- Como ganar: Si el numero que sale coincide con tu prediccion, ganas! \n" +
+      "3- Tipos de jugadas disponibles: \n" +
+      "   a- Juego de Paredes (5): Gana si la suma de los dados es 5. \n" +
+      "   b- Juego de De Paul (7): Gana si la suma de los dados es 7. \n" +
+      "   c- Juego de Messi (10): Gana si la suma de los dados es 10."
     );
   }
 
@@ -55,7 +55,7 @@ export class Dado extends Juego {
     if (this.jugador.getSaldo() < this.getApuestaMinima()) {
       console.log(
         "Tu saldo es insuficiente para jugar este juego - Saldo: " +
-          this.jugador.getSaldo()
+        this.jugador.getSaldo()
       );
       this.finalizar();
     }
@@ -105,7 +105,7 @@ export class Dado extends Juego {
       if (this.jugador.getSaldo() < this.getApuestaMinima()) {
         console.log(
           "Tu saldo es insuficiente para jugar este juego - Saldo: " +
-            this.jugador.getSaldo()
+          this.jugador.getSaldo()
         );
         this.finalizar();
       } else {

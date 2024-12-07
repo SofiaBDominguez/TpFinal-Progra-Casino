@@ -45,7 +45,7 @@ function main() {
                 break;
 
             case 0:
-                console.log("Gracias por visitar el Casino del 10. ¡Hasta la proxima!");
+                console.log(`Gracias por visitar el Casino del 10 ${casino.getJugador().getNombre()}. ¡Hasta la proxima!`);
                 seguirJugando = false;
                 break;
 
