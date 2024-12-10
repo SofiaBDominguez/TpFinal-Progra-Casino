@@ -64,6 +64,7 @@ export abstract class Tragamonedas extends Juego {
       }
     }
   }
+  
 /**
  * Metodo encargado de implementar la logica del juego y comunicar el resultado de la apuesta 
  */

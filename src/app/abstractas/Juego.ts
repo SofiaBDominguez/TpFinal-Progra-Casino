@@ -72,9 +72,7 @@ export abstract class Juego implements IJuego {
     this.jugador = jugador;
     this.comoJugar();
   }
-  comoJugar() {
-    console.log("Las reglas son...")
-  }
+  abstract comoJugar() : void ;
 
   finalizar(): Jugador {
     return this.jugador;
