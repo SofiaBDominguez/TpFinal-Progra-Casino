@@ -10,9 +10,14 @@ export interface IJuego {
      * Metodo que muestra las instrucciones del juego 
      */
     comoJugar(): void;
- 
+
     /**
      * Metodo para finalizar el juego 
      */
     finalizar(): Jugador;
+
+    /**
+    * Metodo para solicitar al jugador su apuesta
+    */
+    solicitarApuesta(): void;
 }

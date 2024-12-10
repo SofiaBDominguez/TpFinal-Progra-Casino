@@ -48,17 +48,17 @@ export class Dado extends Juego {
     //Bandera para controlar al bucle
     let seguirJugando: boolean = true;
 
-    console.log(
-      `Bienvenido al juego de dados: ${this.nombre} - Apuesta Minima: ${this.apuestaMinima} \n`
-    );
+    console.log(`Bienvenido al juego de dados: ${this.nombre} - Apuesta Minima: ${this.apuestaMinima} \n`);
+
     //Verificamos que el saldo sea suficiente, si no lo es finalizamos el juego
     if (this.jugador.getSaldo() < this.getApuestaMinima()) {
       console.log(
-        "Tu saldo es insuficiente para jugar este juego - Saldo: " +
+        "Tu saldo es insuficiente para jugar este juego - Saldo:",
         this.jugador.getSaldo()
       );
       this.finalizar();
     }
+
     //Iniciamos el bucle verificando la bandera y tambien verificamos que el saldo sea suficiente partida a partida
     while (
       seguirJugando &&

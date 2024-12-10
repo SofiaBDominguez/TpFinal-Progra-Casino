@@ -12,9 +12,10 @@ export abstract class Juego implements IJuego {
 
   constructor(nombre: string, apuestaMinima: number, multiplicador: number) {
     this.nombre = nombre;
+    this.apuestaMinima = apuestaMinima;
     this.multiplicador = multiplicador;
     this.apuesta = 0;
-    this.apuestaMinima = apuestaMinima;
+    //Aca los instanciamos para no usar el jugador: Jugador | Undefined;
     this.jugador = new Jugador("Mario Bross", 0);
   }
   /**
